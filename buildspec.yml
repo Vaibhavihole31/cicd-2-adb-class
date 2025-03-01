@@ -3,18 +3,31 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: v20.10.0
+      nodejs: 20
   pre_build:
     commands:
-      - echo Build started on `date`
+      - echo Pre-build started on `date`
       - npm install
   build:
     commands:
-      - echo Build Not Required
+      - echo Build started on `date`
+      - npm run build  # Add your actual build command if needed
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Post-build completed on `date`
 
 artifacts:
   files:
-    - "**/*"
+    - package.json
+    - package-lock.json
+    - node_modules/**/*
+    - dist/**/*
+    - public/**/*
+    - appspec.yml
+    - scripts/**/*
+  base-directory: '.'
+  discard-paths: no
+
+cache:
+  paths:
+    - node_modules/**/*
